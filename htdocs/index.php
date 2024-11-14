@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $idW = $_GET['id']?? null;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,11 +15,18 @@
 </head>
 <body>
 <?php
-    if(isset($_SESSION['username'])){
+    if(isset($_SESSION['username']) && $_SESSION['username'] != null){
         include_once("home.php");
+
     }
     else{
-        include_once("login.php");
+        if($idW == 1){
+            include_once("register.php");
+        }else if($idW == 2){
+            include_once("login.php");
+        }else{  
+            include_once("login.php");
+        }
     }
 
 ?>
