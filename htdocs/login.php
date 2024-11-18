@@ -12,6 +12,7 @@
             header("Location: index.php");
         }else{
             echo "User or password incorrect";
+            header("Location: index.php");
         }
     }
 ?>

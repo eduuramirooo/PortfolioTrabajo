@@ -1,10 +1,8 @@
 <?php
     $username = $_SESSION['username'];
-    echo "Welcome home $username";
+    echo "<div class='infoLog'>";
+    echo "Welcome home $username
+    </div>";
     
+    include_once("form.html");
 ?>
-<div class="botonesSeleccion">
-    <button></button>
-    <button>a</button>
-    <button>a</button>
-</div>
