@@ -5,10 +5,11 @@
         $conectar = new Conectar("localhost", "root", "", "portfolio");
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $passwordQ=$conectar->recibir_datos("SELECT password FROM users WHERE username='$username'");
+        $passwordQ=$conectar->recibir_datos("SELECT password, id FROM users WHERE username='$username'");
         if($passwordQ && password_verify($password, $passwordQ[0]['password'])){
             session_start();
             $_SESSION['username'] = $username;
+            $_SESSION['id'] = $passwordQ[0]['id'];
             header("Location: index.php");
         }else{
             echo "User or password incorrect";

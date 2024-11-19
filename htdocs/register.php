@@ -16,9 +16,9 @@
     <form id="registerForm" action="register.php" method="POST">
         <h3>Please register</h3>
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" required>
+        <input type="text" name="name" id="name" required maxlength="20">
         <label for="username">User</label>
-        <input type="text" name="username" id="username" required>
+        <input type="text" name="username" id="username" required maxlength="30">
         <label for="password">Password</label>
         <input type="password" name="password" required>
         <a href="#" onclick="document.getElementById('registerForm').submit();">Enviar</a>

@@ -82,19 +82,28 @@
     });
   });
 </script>
-<form id="msform" method="GET" action="form.php">
+<form id="msform" method="POST" action="form.php"  enctype="multipart/form-data">
   <ul id="progressbar">
-    <li class="active">Account Setup</li>
+    <li class="active">Personal Details</li>
+    <li>Photo</li>
     <li>Social Profiles</li>
-    <li>Personal Details</li>
+    <li>Laboral Experience</li>
     <li>aaaa</li>
   </ul>
   <fieldset>
     <h2 class="fs-title">Create your CV</h2>
     <h3 class="fs-subtitle">Tell us more about u</h3>
     <input type="text" name="nombre" placeholder="Nombre"/>
-    <input type="password" name="apellido" placeholder="Last Name " />
-    <input type="password" name="2apellido" placeholder="Second Name" />
+    <input type="text" name="apellido" placeholder="Last Name " />
+    <input type="text" name="2apellido" placeholder="Second Name" />
+    <input type="text" name="yearBirth" placeholder="Year of birth"  maxlength="4"/>
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Personal Details</h2>
+    <h3 class="fs-subtitle">Upload a photo for your CV</h3>
+    <input type="file" name="image" class="img-upload" >
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
     <input type="button" name="next" class="next action-button" value="Next" />
   </fieldset>
   <fieldset>
@@ -126,36 +135,29 @@
     <input type="text" name="phone" placeholder="Phone" />
     <textarea name="address" placeholder="Address"></textarea>
     <input type="button" name="previous" class="previous action-button" value="Previous" />
-    <a href="" class="submit action-button" target="_top">Submit</a>
+    <input href="form.php" class="submit action-button" type="submit" value="Enviar"/>
   </fieldset>
 </form>
 <script>
-  $("input[name='fechaS']").on("change", function () {
+  function validarFechas() {
     var fechaE = $("input[name='fechaE']").val();
-    var fechaS = $(this).val();
-    var mensajeErr = $("#mensajeErr");
-    var next = $(this).closest("fieldset").find(".next");
-    if (fechaE && fechaS && new Date(fechaE) >= new Date(fechaS)) {
-      next.prop("disabled", true);
-      mensajeErr.text("La fecha de salida debe ser mas tarde a la de entrada");
-    } else {
-      mensajeErr.text("");
-      next.prop("disabled", false);
-    }
-  });
-
-  $("input[name='fechaE']").on("change", function () {
-    var fechaE = $(this).val();
     var fechaS = $("input[name='fechaS']").val();
-    var next = $(this).closest("fieldset").find(".next");
     var mensajeErr = $("#mensajeErr");
+    var next = $("fieldset").find(".next");
+
     if (fechaE && fechaS && new Date(fechaE) >= new Date(fechaS)) {
       next.prop("disabled", true);
-      mensajeErr.text("La fecha de salida debe ser mas tarde a la de entrada");
+      mensajeErr.text("La fecha de salida debe ser más tarde que la de entrada");
     } else {
       mensajeErr.text("");
       next.prop("disabled", false);
     }
-  });
+  }
+
+  // Validar cuando cambie la fecha de entrada
+  $("input[name='fechaE']").on("change", validarFechas);
+
+  // Validar cuando cambie la fecha de salida
+  $("input[name='fechaS']").on("change", validarFechas);
 </script>
-</script>
+
