@@ -115,7 +115,7 @@ form button {
 
  /*form styles*/
  #msform {
-    width: 400px;
+    width: 600px;
     margin: 50px auto;
     text-align: center;
     position: relative;
@@ -272,7 +272,20 @@ form input[type="file"]::file-selector-button {
   font-size: 14px;
   cursor: pointer;
 }
-
-
-
-
+.portfolio{
+  width: 60%;
+  margin-left: 20%;
+  box-shadow: 0 0 10px 1px var(--light-blue);
+  text-align: center;
+  border-radius: 5px;
+}
+.portfolio .headA{
+  display: grid;
+  grid-template-columns: 30% 70%;
+  border: 1px solid var(--light-blue);
+}
+.portfolio .headA img{
+  width: 300px;
+  border-radius: 5px;
+  margin :10px;
+}

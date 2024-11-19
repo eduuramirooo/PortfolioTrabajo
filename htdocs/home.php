@@ -4,5 +4,5 @@
     echo "Welcome home $username
     </div>";
     
-    include_once("form.html");
+    include_once("form.php");
 ?>
