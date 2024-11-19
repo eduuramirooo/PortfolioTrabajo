@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2024 a las 09:55:16
+-- Tiempo de generación: 19-11-2024 a las 11:56:22
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `portfolio`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `head`
+--
+
+CREATE TABLE `head` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `apellido` varchar(30) NOT NULL,
+  `apellido2` varchar(30) NOT NULL,
+  `anio` varchar(4) NOT NULL,
+  `img` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -47,6 +63,12 @@ INSERT INTO `users` (`id`, `nombre`, `username`, `password`) VALUES
 --
 
 --
+-- Indices de la tabla `head`
+--
+ALTER TABLE `head`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -55,6 +77,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `head`
+--
+ALTER TABLE `head`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
