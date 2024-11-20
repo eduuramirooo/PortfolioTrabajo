@@ -5,6 +5,9 @@
     $idPorfolio= $_SESSION['idPortfolio'];
     if($conectar){
         $queryH = $conectar->recibir_datos("SELECT * FROM head WHERE id_portfolio = $idPorfolio LIMIT 1");
+        if($queryH == null){
+            header("Location: index.php");
+        }
         $queryE = $conectar->recibir_datos("SELECT * FROM linea_experiencia WHERE id_portfolio = $idPorfolio");
         echo "<h1>Portfolio/CV</h1>";
         echo "<div class='portfolio'>";

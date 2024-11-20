@@ -301,3 +301,8 @@ h1{
   color: var(--dark-blue);
   margin: 10px;
 }
+.portfolios{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 10px;
+}

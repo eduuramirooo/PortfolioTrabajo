@@ -1,7 +1,13 @@
 <?php
     session_start();
     $idW = $_GET['id']?? null;
-    $corr = $_GET['corr']?? null;
+    $corr = $_GET['corr'] ?? null;
+    $do= $_GET['do'] ?? null;
+    $iniciado = false;
+    if(isset($_SESSION['username']) && $_SESSION['username'] != null){
+        $iniciado=true;
+
+    }
     include_once("conectar.php");
     $conectar = new Conectar("localhost", "root", "", "portfolio");
     if(isset($_SESSION["username"])){
@@ -16,7 +22,15 @@
 <html lang="es">
     <head>
     <header>
-        <img src="./img/logo.png" alt="logo">
+            <?php
+                if($iniciado){
+                    echo "<a href='logout.php'><img src='./img/logo.png' alt='logo'></a>";
+                }else{
+                   echo" <img src='./img/logo.png' alt='logo'>";    
+                }
+            ?>
+    
+
     </header>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,10 +40,9 @@
 <body>
 <?php
     if(isset($_SESSION['username']) && $_SESSION['username'] != null){
-        if($corr==null){
+        if($corr!=1){
             $idPortfolio = $conectar->recibir_datos("SELECT id FROM port WHERE id_usuario = $id");
-           
-            if($idPortfolio[0]['id'] == null){
+            if(!$idPortfolio){
                 include_once("home.php");
             }else{
                 $_SESSION['idPortfolio'] = $idPortfolio[0]['id'];
@@ -38,7 +51,7 @@
             // include_once("home.php");
 
         }else{
-            include_once("portfolio.php");
+            include_once("ver_portfoliosUser.php");
         }
 
     }

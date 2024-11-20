@@ -10,6 +10,7 @@
             session_start();
             $_SESSION['username'] = $username;
             $_SESSION['id'] = $passwordQ[0]['id'];
+            $_SESSION['iniciado'] = true;
             $selectPortfolio = $conectar->recibir_datos("SELECT id FROM port WHERE id_usuario = ".$_SESSION['id']);
             if($selectPortfolio[0]['id'] != null){
                 $_SESSION['idPortfolio'] = $selectPortfolio[0]['id'];
