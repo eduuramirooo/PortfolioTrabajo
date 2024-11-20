@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2024 a las 11:56:22
+-- Tiempo de generación: 20-11-2024 a las 14:02:41
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -30,12 +30,61 @@ SET time_zone = "+00:00";
 CREATE TABLE `head` (
   `id` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
+  `id_portfolio` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `apellido` varchar(30) NOT NULL,
   `apellido2` varchar(30) NOT NULL,
   `anio` varchar(4) NOT NULL,
   `img` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `head`
+--
+
+INSERT INTO `head` (`id`, `id_usuario`, `id_portfolio`, `name`, `apellido`, `apellido2`, `anio`, `img`) VALUES
+(1, 1, 1, 'Eduuuuuuu', '13', '13', '1211', './img/subidas/upload1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `linea_experiencia`
+--
+
+CREATE TABLE `linea_experiencia` (
+  `id` int(11) NOT NULL,
+  `id_portfolio` int(11) NOT NULL,
+  `company` varchar(50) NOT NULL,
+  `position` varchar(50) NOT NULL,
+  `fechaE` date NOT NULL,
+  `fechaS` date NOT NULL,
+  `experience` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `linea_experiencia`
+--
+
+INSERT INTO `linea_experiencia` (`id`, `id_portfolio`, `company`, `position`, `fechaE`, `fechaS`, `experience`) VALUES
+(1, 1, '', '', '1970-01-01', '1970-01-01', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `port`
+--
+
+CREATE TABLE `port` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `port`
+--
+
+INSERT INTO `port` (`id`, `id_usuario`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -69,6 +118,18 @@ ALTER TABLE `head`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `linea_experiencia`
+--
+ALTER TABLE `linea_experiencia`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `port`
+--
+ALTER TABLE `port`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -82,7 +143,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `head`
 --
 ALTER TABLE `head`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `linea_experiencia`
+--
+ALTER TABLE `linea_experiencia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `port`
+--
+ALTER TABLE `port`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
