@@ -128,7 +128,7 @@ form button {
     padding: 20px 30px;
     box-sizing: border-box;
     width: 100%;
-    margin: 0 10%;
+    /* margin: 0 10%; */
     
     /*stacking fieldsets above each other*/
     position: relative;
@@ -150,6 +150,7 @@ form button {
   #msform textarea{
     resize: none;
     width: 89%;
+    /* height: fit-content; */
     transition: background-color 0.5s, border-radius 0.5s;
     margin-left: 8px;
   }
@@ -197,7 +198,7 @@ form button {
     /*CSS counters to number the steps*/
     counter-reset: step;
     position: relative;
-    left: 10%;
+    /* left: 10%; */
   }
   #progressbar li {
     list-style-type: none;
@@ -281,11 +282,22 @@ form input[type="file"]::file-selector-button {
 }
 .portfolio .headA{
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 40% 50% 10%;
   border: 1px solid var(--light-blue);
 }
 .portfolio .headA img{
-  width: 300px;
+  width: 150px;
+
   border-radius: 5px;
   margin :10px;
+}
+.infoHead{
+  text-align: left;
+  margin: 10px;
+
+}
+h1{
+  text-align: center;
+  color: var(--dark-blue);
+  margin: 10px;
 }

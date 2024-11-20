@@ -37,5 +37,16 @@ class Conectar{
     public function prepare($query) {
         return $this->conexion->prepare($query);
     }
+    function hacer_consultaS ($consulta){
+        $sentencia = $this->conexion->query($consulta);
+        if ($sentencia === false) {
+            throw new Exception("Error in query: " . $this->conexion->error);
+        }
+        $filas = [];
+        while( $row = $sentencia->fetch_assoc()){
+            $filas[] = $row;
+        }
+        return $filas;
+    }
 }
 ?>

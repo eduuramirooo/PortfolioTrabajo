@@ -4,9 +4,11 @@
     $corr = $_GET['corr']?? null;
     include_once("conectar.php");
     $conectar = new Conectar("localhost", "root", "", "portfolio");
-    $idQuery = $conectar->recibir_datos("SELECT id FROM users WHERE username = '".$_SESSION['username']."'");
-    $_SESSION['id'] = $idQuery[0]['id'];
-    $id = $_SESSION['id'];
+    if(isset($_SESSION["username"])){
+        $idQuery = $conectar->recibir_datos("SELECT id FROM users WHERE username = '".$_SESSION['username']."'");
+        $_SESSION['id'] = $idQuery[0]['id'];
+        $id = $_SESSION['id'];
+            }
 ?>
 <!DOCTYPE html>
 <html lang="es">

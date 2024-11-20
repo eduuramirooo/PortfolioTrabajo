@@ -10,7 +10,13 @@
             session_start();
             $_SESSION['username'] = $username;
             $_SESSION['id'] = $passwordQ[0]['id'];
-            header("Location: index.php");
+            $selectPortfolio = $conectar->recibir_datos("SELECT id FROM port WHERE id_usuario = ".$_SESSION['id']);
+            if($selectPortfolio[0]['id'] != null){
+                $_SESSION['idPortfolio'] = $selectPortfolio[0]['id'];
+                header("Location: index.php?corr=1");
+            }else{
+                header("Location: index.php");
+            }
         }else{
             echo "User or password incorrect";
             header("Location: index.php");

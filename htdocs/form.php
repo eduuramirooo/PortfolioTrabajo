@@ -3,6 +3,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include_once("conectar.php");
     $conectar = new Conectar("localhost", "root", "", "portfolio");
     session_start();
+    //Consulta para saber portfolio
+    $consultaPorfolio= $conectar->hacer_consulta("Select port.id from port where id_usuario = ?", "i", [$_SESSION['id']]);
+    if($consultaPorfolio){
+        $idPortfolio = $consultaPorfolio[0]['id'];
+        header("Location: index.php?corr=1");
+    }
+
+    $consultaPortfolio = $conectar->hacer_consultaS("SELECT id FROM port ORDER BY id DESC LIMIT 1", "", "");
+    $idPortfolio = $consultaPortfolio[0]['id']?? null;
+    if($idPortfolio == null){
+        $idPortfolio = 1;
+    }else{
+        $idPortfolio = $idPortfolio + 1;
+    }
+    $_SESSION['idPortfolio'] = $idPortfolio;
+    // Datos personales
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $apellido2 = $_POST['2apellido'];
@@ -36,11 +52,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 chmod($ruta_final, 0777);
 
                 // Guardar en la base de datos
-                $query = $conectar->hacer_consulta("INSERT INTO head (img, name, apellido, apellido2,anio, id_usuario) VALUES (?,?,?,?,?,?)", "sssssi", [$ruta_final, $nombre, $apellido, $apellido2,$anio, $id]);
+                $query = $conectar->hacer_consulta("INSERT INTO head (img, name, apellido, apellido2,anio, id_usuario, id_portfolio) VALUES (?,?,?,?,?,?, ?)", "sssssii", [$ruta_final, $nombre, $apellido, $apellido2,$anio, $id, $idPortfolio]);
                 if ($query) {
                     echo "Imagen subida y guardada correctamente";
                 } else {
-                     header("Location: index.php?corr=1");
+                  $queryPortfolio = $conectar->hacer_consulta("INSERT INTO port (id_usuario) VALUES (?)", "i", [$id]);
+                  header("Location: index.php?corr=1");
+
                 }
             } else {
                 echo "Error al mover el archivo";
@@ -51,6 +69,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "No se seleccionó ningún archivo";
     }
+    //Laboral Experience--
+    $workstation= $_POST["workstation"];
+    $positionC= $_POST["positionC"];
+    $fechaE = date("Y-m-d", strtotime($_POST["fechaE"]));
+    $fechaS = date("Y-m-d", strtotime($_POST["fechaS"]));
+    $explained= $_POST["explained"];
+    $queryInsert = $conectar->hacer_consulta("INSERT INTO linea_experiencia (company, position, fechaE, fechaS, experience, id_portfolio) VALUES (?,?,?,?,?,?)", "sssssi", [$workstation, $positionC, $fechaE, $fechaS, $explained, $idPortfolio]);
+    
 }
 ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -177,10 +203,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <fieldset>
     <h2 class="fs-title">Laboral Experience</h2>
     <h3 class="fs-subtitle">Tell us more about ur laboral Experience</h3>
-    <input type="text" name="workstation" placeholder="Company" />
-    <input type="text" name="positionC" placeholder="Position in the company" />
-    <input type="date" name="fechaE" placeholder="Position in the company" />
-    <input type="date" name="fechaS" placeholder="Position in the company" />
+    <input type="text" name="workstation" placeholder="Company" maxlength="50"/>
+    <input type="text" name="positionC" placeholder="Position in the company" maxlength="50"/>
+    <input type="date" name="fechaE" />
+    <input type="date" name="fechaS"  />
+    <input type="textarea" name="explained" placeholder="Explain your experience">
     <p id="mensajeErr"></p>
     <!-- <input type="text" name="gplus" placeholder="Google Plus" /> -->
     <input type="button" name="previous" class="previous action-button" value="Previous" />
