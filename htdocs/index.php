@@ -8,6 +8,8 @@
         $idQuery = $conectar->recibir_datos("SELECT id FROM users WHERE username = '".$_SESSION['username']."'");
         $_SESSION['id'] = $idQuery[0]['id'];
         $id = $_SESSION['id'];
+        
+        
             }
 ?>
 <!DOCTYPE html>
@@ -25,7 +27,15 @@
 <?php
     if(isset($_SESSION['username']) && $_SESSION['username'] != null){
         if($corr==null){
-            include_once("home.php");
+            $idPortfolio = $conectar->recibir_datos("SELECT id FROM port WHERE id_usuario = $id");
+           
+            if($idPortfolio[0]['id'] == null){
+                include_once("home.php");
+            }else{
+                $_SESSION['idPortfolio'] = $idPortfolio[0]['id'];
+                header("Location: index.php?corr=1");
+            }
+            // include_once("home.php");
 
         }else{
             include_once("portfolio.php");
