@@ -3,19 +3,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include_once("conectar.php");
     $conectar = new Conectar("localhost", "root", "", "portfolio");
     session_start();
-    //Consulta para saber portfolio
-    $consultaPorfolio= $conectar->hacer_consulta("Select port.id from port where id_usuario = ?", "i", [$_SESSION['id']]);
-    if($consultaPorfolio){
-        $idPortfolio = $consultaPorfolio[0]['id'];
-        header("Location: index.php?corr=1");
-    }
-
+    //Consulta para saber id portfolio
+    
     $consultaPortfolio = $conectar->hacer_consultaS("SELECT id FROM port ORDER BY id DESC LIMIT 1", "", "");
-    $idPortfolio = $consultaPortfolio[0]['id']?? null;
-    if($idPortfolio == null){
-        $idPortfolio = 1;
-    }else{
-        $idPortfolio = $idPortfolio + 1;
+    if ($consultaPortfolio) {
+      $idPortfolio = $consultaPortfolio[0]['id'] + 1;
+    } else {
+      $idPortfolio = 1;
     }
     $_SESSION['idPortfolio'] = $idPortfolio;
     // Datos personales
@@ -79,6 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
 }
 ?>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function () {

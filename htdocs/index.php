@@ -1,22 +1,22 @@
 <?php
+    include_once("conectar.php");
+    $conectar = new Conectar("localhost", "root", "", "portfolio");
     session_start();
+    //Cambiar a Register
     $idW = $_GET['id']?? null;
     $corr = $_GET['corr'] ?? null;
     $do= $_GET['do'] ?? null;
+    $portfolio= $_GET['portfolio'] ??null;
     $iniciado = false;
+    
     if(isset($_SESSION['username']) && $_SESSION['username'] != null){
-        $iniciado=true;
-
-    }
-    include_once("conectar.php");
-    $conectar = new Conectar("localhost", "root", "", "portfolio");
-    if(isset($_SESSION["username"])){
         $idQuery = $conectar->recibir_datos("SELECT id FROM users WHERE username = '".$_SESSION['username']."'");
         $_SESSION['id'] = $idQuery[0]['id'];
         $id = $_SESSION['id'];
-        
-        
-            }
+        $iniciado=true;
+
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -39,8 +39,9 @@
 </head>
 <body>
 <?php
-    if(isset($_SESSION['username']) && $_SESSION['username'] != null){
+    if($iniciado){
         if($corr!=1){
+            $portfolio= $_GET['portfolio'] ??null;
             $idPortfolio = $conectar->recibir_datos("SELECT id FROM port WHERE id_usuario = $id");
             if(!$idPortfolio){
                 include_once("home.php");
@@ -56,6 +57,7 @@
 
     }
     else{
+        // Si no está registrado vemos si quiere iniciar sesion o registrarse
         if($idW == 1){
             include_once("register.php");
         }else if($idW == 2){
