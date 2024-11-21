@@ -25,6 +25,11 @@
             <?php
                 if($iniciado){
                     echo "<a href='logout.php'><img src='./img/logo.png' alt='logo'></a>";
+                    echo "<div class='grid3'>";
+                    echo "<a href='index.php?corr=1'>Home</a>";
+                    echo "<a href='index.php?corr=2'>Agregar Porfolio</a>";
+                    echo "<a href='logout.php'>Log-Out</a></div>";
+
                 }else{
                    echo" <img src='./img/logo.png' alt='logo'>";    
                 }
@@ -40,20 +45,29 @@
 <body>
 <?php
     if($iniciado){
-        if($corr!=1){
+        if(isset($portfolio)){
+            $_SESSION['idPortfolio']=$portfolio;
+            include_once("portfolio.php");
+        }else if($corr!=1){
             $portfolio= $_GET['portfolio'] ??null;
             $idPortfolio = $conectar->recibir_datos("SELECT id FROM port WHERE id_usuario = $id");
             if(!$idPortfolio){
-                include_once("home.php");
             }else{
+                    if($corr==2){
+                        include_once("form.php");
+                        exit;
+                    }
                 $_SESSION['idPortfolio'] = $idPortfolio[0]['id'];
                 header("Location: index.php?corr=1");
             }
-            // include_once("home.php");
+             include_once("home.php");
 
         }else{
+            
+            echo $portfolio ;
             include_once("ver_portfoliosUser.php");
         }
+        
 
     }
     else{

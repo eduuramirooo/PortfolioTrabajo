@@ -4,7 +4,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conectar = new Conectar("localhost", "root", "", "portfolio");
     session_start();
     //Consulta para saber id portfolio
-    
     $consultaPortfolio = $conectar->hacer_consultaS("SELECT id FROM port ORDER BY id DESC LIMIT 1", "", "");
     if ($consultaPortfolio) {
       $idPortfolio = $consultaPortfolio[0]['id'] + 1;
@@ -20,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id= $_SESSION['id'];
     $imagen = $_FILES['image']['name'];
     // Ahora voy a cambiar el nombre a la imagen
-    $imagen="upload".$id.".jpg";
+    $imagen="upload".$id."-".$idPortfolio.".jpg";
     if (isset($imagen) && $imagen != "") {
         $tipo = $_FILES['image']['type'];
         $tamanio = $_FILES['image']['size'];
@@ -42,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             $ruta_final = $ruta . basename($imagen);
-            if (move_uploaded_file($temp, $ruta_final)) { // Cambiar a move_uploaded_file
+            if (move_uploaded_file($temp, $ruta_final)) { 
                 chmod($ruta_final, 0777);
 
                 // Guardar en la base de datos

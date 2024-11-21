@@ -2,13 +2,13 @@
     $id= $_SESSION['id'];
     include_once ("conectar.php");
     $conectar = new Conectar("localhost", "root", "", "portfolio");
-    $idPorfolio= $_SESSION['idPortfolio'];
+    $portfolio= $_SESSION['idPortfolio'] ;
     if($conectar){
-        $queryH = $conectar->recibir_datos("SELECT * FROM head WHERE id_portfolio = $idPorfolio LIMIT 1");
+        $queryH = $conectar->recibir_datos("SELECT * FROM head WHERE id_portfolio = $portfolio LIMIT 1");
         if($queryH == null){
             header("Location: index.php");
         }
-        $queryE = $conectar->recibir_datos("SELECT * FROM linea_experiencia WHERE id_portfolio = $idPorfolio");
+        $queryE = $conectar->recibir_datos("SELECT * FROM linea_experiencia WHERE id_portfolio = $portfolio");
         echo "<h1>Portfolio/CV</h1>";
         echo "<div class='portfolio'>";
         foreach($queryH as $row){
