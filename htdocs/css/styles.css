@@ -292,7 +292,7 @@ form input[type="file"]::file-selector-button {
   margin :10px;
 }
 .infoHead{
-  text-align: left;
+  text-align: right;
   margin: 10px;
 
 }
@@ -336,4 +336,13 @@ header .grid3 a{
   margin: 10px;
   font-size: 20px;
   color: var(--dark-blue);
+}
+.social img{
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  fill: var(--dark-blue);
+}
+.bloqueBajo #github{
+  fill: var(--dark-blue);
 }

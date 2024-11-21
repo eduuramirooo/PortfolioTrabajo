@@ -55,12 +55,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             } else {
                 echo "Error al mover el archivo";
+                exit;
             }
         } else {
             echo "El archivo es demasiado grande";
+            exit;
         }
     } else {
         echo "No se seleccionó ningún archivo";
+        exit;
     }
     //Laboral Experience--
     $workstation= $_POST["workstation"];
@@ -70,6 +73,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $explained= $_POST["explained"];
     $queryInsert = $conectar->hacer_consulta("INSERT INTO linea_experiencia (company, position, fechaE, fechaS, experience, id_portfolio) VALUES (?,?,?,?,?,?)", "sssssi", [$workstation, $positionC, $fechaE, $fechaS, $explained, $idPortfolio]);
     
+
+    //Social Profiles
+    $twitter = $_POST['twitter'];
+    $github = $_POST['github'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+
+    $querySocial = $conectar->hacer_consulta("INSERT INTO social (twitter, github, email, tel, id_portfolio) VALUES (?,?,?,?,?)", "ssssi", [$twitter, $github, $email, $phone, $idPortfolio]);
+
 }
 ?>
 
@@ -80,6 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     var left, opacity, scale;
     var animating;
 
+    // Manejo del botón "Next"
     $(".next").click(function () {
       if (animating) return false;
       animating = true;
@@ -92,7 +105,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       // Mostrar el siguiente fieldset
       next_fs.show();
-      // Animar
+
+      // Animar transición
       current_fs.animate(
         { opacity: 0 },
         {
@@ -100,6 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             scale = 1 - (1 - now) * 0.2;
             left = now * 50 + "%";
             opacity = 1 - now;
+
             current_fs.css({
               transform: "scale(" + scale + ")",
               position: "absolute",
@@ -109,13 +124,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           duration: 800,
           complete: function () {
             current_fs.hide();
-            animating = false;
+            setTimeout(function () {
+              current_fs.css({ position: "relative" });
+              animating = false;
+            }, 50);
           },
           easing: "swing",
         }
       );
     });
 
+    // Manejo del botón "Previous"
     $(".previous").click(function () {
       if (animating) return false;
       animating = true;
@@ -131,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // Mostrar el fieldset anterior
       previous_fs.show();
 
-      // Animar
+      // Animar transición
       current_fs.animate(
         { opacity: 0 },
         {
@@ -139,6 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             scale = 0.8 + (1 - now) * 0.2;
             left = (1 - now) * 50 + "%";
             opacity = 1 - now;
+
             current_fs.css({ left: left });
             previous_fs.css({
               transform: "scale(" + scale + ")",
@@ -178,7 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="text" name="yearBirth" placeholder="Year of birth"  maxlength="4"/>
     <input type="button" name="next" class="next action-button" value="Next" />
   </fieldset>
-    <fieldset>
+    <fieldset id="foto">
     <h2 class="fs-title">Personal Details</h2>
     <h3 class="fs-subtitle">Upload a photo for your CV</h3>
     <input type="file" name="image" class="img-upload" >
@@ -189,7 +209,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h2 class="fs-title">Social Network</h2>
     <h3 class="fs-subtitle">Write your social networks</h3>
     <input type="text" name="twitter" placeholder="Twitter" />
-    <input type="text" name="instagram" placeholder="Instagram" />
+    <input type="text" name="github" placeholder="Github" />
     <!-- <input type="text" name="gplus" placeholder="Google Plus" /> -->
     <input type="button" name="previous" class="previous action-button" value="Previous" />
     <input type="button" name="next" class="next action-button" value="Next" />
@@ -210,8 +230,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <fieldset>
     <h2 class="fs-title">Contact</h2>
     <h3 class="fs-subtitle"></h3>
-    <input type="text" name="fname" placeholder="Telephone" />
-    <input type="email" name="email" placeholder="Email" />
+    <!-- <input type="text" name="fname" placeholder="Telephone" /> -->
+    <input type="email" name="email" placeholder="Email" required />
     <input type="text" name="phone" placeholder="Phone" />
     <!-- <textarea name="address" placeholder="Address"></textarea> -->
     <input type="button" name="previous" class="previous action-button" value="Previous" />
@@ -221,6 +241,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <script>
+  function validarFoto() {
+    var foto = $("input[name='image']").val();
+    var next = $("fieldset").find(".next");
+
+    if (!foto) {
+      next.prop("disabled", true);
+    } else {
+      next.prop("disabled", false);
+    }
+  }
   function validarFechas() {
     var fechaE = $("input[name='fechaE']").val();
     var fechaS = $("input[name='fechaS']").val();
@@ -235,7 +265,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       next.prop("disabled", false);
     }
   }
-
+  $("#foto input[name='next']").on("mouseenter", validarFoto);
+  $("#foto input[name='next']").on("mouseleft", next.prop("disabled", false));
   // Validar cuando cambie la fecha de entrada
   $("input[name='fechaE']").on("change", validarFechas);
 

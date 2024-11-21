@@ -9,17 +9,30 @@
             header("Location: index.php");
         }
         $queryE = $conectar->recibir_datos("SELECT * FROM linea_experiencia WHERE id_portfolio = $portfolio");
+        $querySocial = $conectar->recibir_datos("SELECT * FROM social WHERE id_portfolio = $portfolio");
         echo "<h1>Portfolio/CV</h1>";
         echo "<div class='portfolio'>";
         foreach($queryH as $row){
             echo"<div class='headA'>";
             echo "<img src='".$row['img']."' alt='".$row['name']."'  >";
+            echo "<div class='social'>
+            <p>Redes Sociales</p>";
+            
+            foreach($querySocial as $rowS){
+                    echo "<a href='https://github.com/".$rowS['github']."'><img src='./img/github-svgrepo-com.svg' alt='GitHub' id='github'></a>";
+                    echo "<a href='https://twitter.com/".$rowS['twitter']."'><img src='./img/x-social-media-round-icon.svg' id='twitter'><a>";
+                    echo "<a href ='mailto:".$rowS['email']."'><img src='./img/mail-forward.svg' id='email'></a>";
+                    echo $rowS['tel'];
+            }    }
+
+            
+            echo"</div></div>";
             echo "<div class='infoHead'>";
             echo "<h2>".$row['name']."</h2>";
             echo "<h2>".$row['apellido']."</h2>";
             echo "<h2>".$row['apellido2']."</h2>";
             echo "<h2>".$row['anio']."</h2>";
-            echo "</div></div><hr>
+            echo "</div><hr>
             <div class='bloqueBajo'>
             <div class='experiencia'>
             <p>Experiencia</p>";
@@ -28,10 +41,10 @@
                 echo "<h3>".$row['fechaE']." ".$row['fechaS']."</h3>";
                 echo "<h3>".$row['experience']."</h3>";
             }
-            echo"</div></div>";
+            echo"</div>";
             
         }
         echo "</div>";
-    }
+    
   
 ?>
