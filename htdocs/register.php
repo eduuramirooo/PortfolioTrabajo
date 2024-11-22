@@ -5,13 +5,20 @@
             $name = $_POST['name'];
             $username = $_POST['username'];
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-            $conectar->hacer_consulta("INSERT INTO users (nombre, username, password) VALUES (?,?,?)", "sss", [$name, $username, $password]);
-            if($conectar){
-                session_start();
-                $_SESSION['username'] = $username;
-                header("Location: index.php");
-            }
-        }
+             $consultaQ=$conectar->hacer_consulta("SELECT * FROM users WHERE username = ?", "s", [$username]);
+             if ($consultaQ){
+                 echo "<script>document.getElementById('errorLog').innerHTML='User already exists'</script>";
+                 exit;
+                }else{
+
+               $conectar->hacer_consulta("INSERT INTO users (nombre, username, password) VALUES (?,?,?)", "sss", [$name, $username, $password]);
+                if($conectar){
+                    session_start();
+                    $_SESSION['username'] = $username;
+
+                    header("Location: index.php");
+                }
+        }}
     ?>
     <form id="registerForm" action="register.php" method="POST">
         <h3>Please register</h3>
@@ -21,6 +28,7 @@
         <input type="text" name="username" id="username" required maxlength="30">
         <label for="password">Password</label>
         <input type="password" name="password" required>
-        <a href="#" onclick="document.getElementById('registerForm').submit();">Enviar</a>
+        <p id="errorLog"></p>
+        <button type="submit">Enviar</button>
         <a href="index.php?id=2">Login</a>
     </form>

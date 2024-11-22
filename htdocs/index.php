@@ -21,7 +21,15 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-    <header>
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Portfolio Edu</title>
+</head>
+<body>
+<header>
             <?php
                 if($iniciado){
                     echo "<a href='logout.php'><img src='./img/logo.png' alt='logo'></a>";
@@ -29,7 +37,6 @@
                     echo "<a href='index.php?corr=1'>Home</a>";
                     echo "<a href='index.php?corr=2'>Agregar Porfolio</a>";
                     echo "<a href='logout.php'>Log-Out</a></div>";
-
                 }else{
                    echo" <img src='./img/logo.png' alt='logo'>";    
                 }
@@ -37,12 +44,6 @@
     
 
     </header>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
-    <title>Portfolio Edu</title>
-</head>
-<body>
 <?php
     if($iniciado){
         if(isset($portfolio)){

@@ -1,5 +1,12 @@
+
 <?php
-    $id= $_SESSION['id'];
+    echo "<script> document.addEventListener(\"DOMContentLoaded\",()=>{
+        const portfolio = document.querySelector(\".portfolio\");
+        setTimeout(()=>{
+           portfolio.classList.add('visible');
+        },300); });
+    </script>";
+$id= $_SESSION['id'];
     include_once ("conectar.php");
     $conectar = new Conectar("localhost", "root", "", "portfolio");
     $portfolio= $_SESSION['idPortfolio'] ;
@@ -17,7 +24,6 @@
             echo "<img src='".$row['img']."' alt='".$row['name']."'  >";
             echo "<div class='social'>
             <p>Redes Sociales</p>";
-            
             foreach($querySocial as $rowS){
                     echo "<a href='https://github.com/".$rowS['github']."'><img src='./img/github-svgrepo-com.svg' alt='GitHub' id='github'></a>";
                     echo "<a href='https://twitter.com/".$rowS['twitter']."'><img src='./img/x-social-media-round-icon.svg' id='twitter'><a>";
@@ -26,7 +32,7 @@
             }    }
 
             
-            echo"</div></div>";
+            echo"</div></div><hr>";
             echo "<div class='infoHead'>";
             echo "<h2>".$row['name']."</h2>";
             echo "<h2>".$row['apellido']."</h2>";
