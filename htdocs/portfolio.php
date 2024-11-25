@@ -4,7 +4,7 @@
         const portfolio = document.querySelector(\".portfolio\");
         setTimeout(()=>{
            portfolio.classList.add('visible');
-        },300); });
+        },200); });
     </script>";
 $id= $_SESSION['id'];
     include_once ("conectar.php");
@@ -18,6 +18,7 @@ $id= $_SESSION['id'];
         $queryE = $conectar->recibir_datos("SELECT * FROM linea_experiencia WHERE id_portfolio = $portfolio");
         $querySocial = $conectar->recibir_datos("SELECT * FROM social WHERE id_portfolio = $portfolio");
         echo "<h1>Portfolio/CV</h1>";
+        echo "<a href='index.php?portfolio=".$portfolio."&editar=true'>Editar</a>";
         echo "<div class='portfolio'>";
         foreach($queryH as $row){
             echo"<div class='headA'>";

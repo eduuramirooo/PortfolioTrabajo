@@ -8,6 +8,7 @@
     $do= $_GET['do'] ?? null;
     $portfolio= $_GET['portfolio'] ??null;
     $iniciado = false;
+    $editar = $_GET['editar']??null;
     
     if(isset($_SESSION['username']) && $_SESSION['username'] != null){
         $idQuery = $conectar->recibir_datos("SELECT id FROM users WHERE username = '".$_SESSION['username']."'");
@@ -47,8 +48,13 @@
 <?php
     if($iniciado){
         if(isset($portfolio)){
-            $_SESSION['idPortfolio']=$portfolio;
-            include_once("portfolio.php");
+            if($editar){
+                include_once("editarP.php");
+            }else{
+
+                $_SESSION['idPortfolio']=$portfolio;
+                include_once("portfolio.php");
+            }
         }else if($corr!=1){
             $portfolio= $_GET['portfolio'] ??null;
             $idPortfolio = $conectar->recibir_datos("SELECT id FROM port WHERE id_usuario = $id");

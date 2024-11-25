@@ -1,9 +1,12 @@
 
 <?php
     echo "<script> document.addEventListener(\"DOMContentLoaded\",()=>{
-        const portfolio = document.querySelector(\".portfolioPreview\");
+        const portfolio = document.querySelectorAll(\".portfolioPreview\");
         setTimeout(()=>{
-           portfolio.classList.add('visible');
+            for(let i=0; i<portfolio.length; i++){
+                portfolio[i].classList.add('visible');
+            }
+          
         },300); });
     </script>";
     include_once ("conectar.php");
@@ -14,10 +17,10 @@
     if($query){
         echo "<div class='portfolios'>";
         foreach($query as $row){
-            echo "<a href='index.php?portfolio=".$row['id']."' ><div class='portfolioPreview'> ";
-           $getDatos = $conectar->recibir_datos("SELECT h.name, h.img, e.company, e.fechaE FROM head h INNER JOIN linea_experiencia e ON h.id_portfolio = e.id_portfolio WHERE h.id_portfolio = ".$row['id']."");
-           if($getDatos){
-               foreach($getDatos as $rows){
+            $getDatos = $conectar->recibir_datos("SELECT h.name, h.img, e.company, e.fechaE FROM head h INNER JOIN linea_experiencia e ON h.id_portfolio = e.id_portfolio WHERE h.id_portfolio = ".$row['id']."");
+            if($getDatos){
+                foreach($getDatos as $rows){
+                   echo "<div class='portfolioPreview'><a href='index.php?portfolio=".$row['id']."' > ";
                    echo "<img src='".$rows['img']."' alt='".$rows['name']."'>
                    <div class='info'>";
                    echo "<h2>".$rows['name']."</h2>";
@@ -27,11 +30,6 @@
                
            }
         }
-
-    
-
-        
-
         echo "</div>";
     }else{
         echo "<script>const titulo=document.getElementById('titulo')
