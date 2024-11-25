@@ -325,7 +325,7 @@ h1{
   text-decoration: none;
   opacity: 0;
   transform: translateY(50px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 1s ease, transform 1s ease;
 
 }
 
@@ -386,13 +386,13 @@ header .grid3 a{
 }
 .formIE .infoHead{
   text-align: left;
-  width: 50%;
-}
-.formIE .bloqueBajo{
-  width: 50%;
 }
 .formIE input[type='submit']{
   width: 90%;
+}
+.infoE{
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 .visible{
   opacity: 1;

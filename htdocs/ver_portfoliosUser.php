@@ -2,12 +2,13 @@
 <?php
     echo "<script> document.addEventListener(\"DOMContentLoaded\",()=>{
         const portfolio = document.querySelectorAll(\".portfolioPreview\");
-        setTimeout(()=>{
-            for(let i=0; i<portfolio.length; i++){
+        for(let i=0; i<portfolio.length; i++){
+                setTimeout(()=>{
                 portfolio[i].classList.add('visible');
+            },100);
             }
           
-        },300); });
+         });
     </script>";
     include_once ("conectar.php");
     $conectar = new Conectar("localhost", "root", "", "portfolio");
