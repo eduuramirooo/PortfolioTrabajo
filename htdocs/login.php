@@ -22,7 +22,7 @@
                 $_SESSION['idPortfolio'] = $selectPortfolio[0]['id'];
                 header("Location: index.php?corr=1");
             }else{
-                header("Location: index.php");
+                header("Location: index.php?corr=1");
             }
         }else{
             echo "User or password incorrect";

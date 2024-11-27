@@ -48,40 +48,51 @@
                         header("Location: index.php");
                     }
                 }else{
-                    $queryH=$conectar -> hacer_consulta("UPDATE port SET activo = 0 WHERE id = ?", "i", [$portfolio]);
-                    var_dump($queryE);
-                    echo "<script>document.addEventListener('DOMContentLoaded',()=>{
-                        const eliminarP = document.getElementById('eliminarP');
-                        eliminarP.innerHTML='Eliminar';
-                        eliminarP.href='logica.php?e=1';
-                    });</script>";
-                    if(!$queryH){
-                        header("Location: index.php");
+                    $opcion=$_GET['eliminarP']?? null;
+
+                    if($opcion==1){
+                        $queryH=$conectar -> hacer_consulta("UPDATE port SET activo = 0 WHERE id = ?", "i", [$portfolio]);
+                        if(!$queryH){
+                            header("Location: index.php");
+                        }
+                    }else{
+                        $queryGA=$conectar->recibir_datos("SELECT * FROM port WHERE id = $portfolio");
+                        $estadoG=$queryGA[0]['activo'];
+                        if($estadoG == 1){
+                            $queryH=$conectar -> hacer_consulta("UPDATE port SET activo = 0 WHERE id = ?", "i", [$portfolio]);
+                            if(!$queryH){
+                                header("Location: index.php");
+                           }
+                        }else{
+                            $queryH=$conectar -> hacer_consulta("UPDATE port SET activo = 1 WHERE id = ?", "i", [$portfolio]);
+                        if(!$queryH){
+                             header("Location: index.php");
+                        }
                     }
-                }
+                }}
             }
             ///valorar el e para cambiar tanto el a como la funcion del sql
-            if($_GET['e'] == 1){
-                $queryH=$conectar -> hacer_consulta("UPDATE port SET activo = 1 WHERE id = ?", "i", [$portfolio]);
-                echo "<script>document.addEventListener('DOMContentLoaded',()=>{
-                    const eliminarP = document.getElementById('eliminarP');
-                    eliminarP.innerHTML='Restaurar';
-                    eliminarP.href='logica.php?e=0';
-                });</script>";
-                if(!$queryH){
-                    header("Location: index.php");
-                }
-            }else{
-                $queryH=$conectar -> hacer_consulta("UPDATE port SET activo = 0 WHERE id = ?", "i", [$portfolio]);
-                echo "<script>document.addEventListener('DOMContentLoaded',()=>{
-                    const eliminarP = document.getElementById('eliminarP');
-                    eliminarP.innerHTML='Eliminar';
-                    eliminarP.href='logica.php?e=1';
-                });</script>";
-                if(!$queryH){
-                    header("Location: index.php");
-                }
-            }
+            // if($_GET['e'] == 1){
+            //     $queryH=$conectar -> hacer_consulta("UPDATE port SET activo = 1 WHERE id = ?", "i", [$portfolio]);
+            //     echo "<script>document.addEventListener('DOMContentLoaded',()=>{
+            //         const eliminarP = document.getElementById('eliminarP');
+            //         eliminarP.innerHTML='Restaurar';
+            //         eliminarP.href='logica.php?e=0';
+            //     });</script>";
+            //     if(!$queryH){
+            //         header("Location: index.php");
+            //     }
+            // }else{
+            //     $queryH=$conectar -> hacer_consulta("UPDATE port SET activo = 0 WHERE id = ?", "i", [$portfolio]);
+            //     echo "<script>document.addEventListener('DOMContentLoaded',()=>{
+            //         const eliminarP = document.getElementById('eliminarP');
+            //         eliminarP.innerHTML='Eliminar';
+            //         eliminarP.href='logica.php?e=1';
+            //     });</script>";
+            //     if(!$queryH){
+            //         header("Location: index.php");
+            //     }
+            // }
            }
 
 ?>

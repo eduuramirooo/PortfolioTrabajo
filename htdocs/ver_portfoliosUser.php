@@ -33,21 +33,20 @@
         echo "<script>const titulo=document.getElementById('titulo')
          titulo.innerHTML='Papelera de reciclaje'
          const portfolios=document.querySelector('.portfolios')
+         const btnIE=document.querySelector('.btnIE')
+         btnIE.style.display='none'
          </script>";
     }else if($papelera==0){
         $query = $conectar->recibir_datos("SELECT * FROM port WHERE id_usuario = $id and activo = 1");
         if(!$query){
             echo "<script>const titulo=document.getElementById('titulo')
             titulo.innerHTML='No tienes portfolios activos' 
-            const portfolios=document.querySelector('.portfolios')
-            portfolios.style.display='flex'    
+            const btnIE=document.querySelector('.btnIE')
             </script>";
             include_once("form.php");
         }
     }
-     else if($papelera==null){
- 
-     }
+   
 
     if($query){
         echo "<div class='portfolios'>";

@@ -16,18 +16,24 @@ $id= $_SESSION['id'];
             header("Location: index.php");
         }
         $queryE = $conectar->recibir_datos("SELECT * FROM linea_experiencia WHERE id_portfolio = $portfolio");
+        $queryPortfolio = $conectar->recibir_datos("SELECT * FROM port WHERE id = $portfolio");
+        $estado = $queryPortfolio[0]['activo'];
         $querySocial = $conectar->recibir_datos("SELECT * FROM social WHERE id_portfolio = $portfolio");
         echo "<h1>Portfolio/CV</h1>";
-        echo "";
 
-        ?>
-        <div id="ignorar">
 
-            <form action="logica.php" method="get" >
-                <a href='index.php?portfolio=".$portfolio."&editar=true'>Editar</a>
-                <button >Eliminar</button></form>
-            </div>
-        <?php
+        echo "<div id='ignorar'>
+
+            <form action='logica.php' method='get' >
+                <a href='index.php?portfolio=".$portfolio."&editar=true'>Editar</a>";
+                if($estado == 1){
+                    echo "<button type='submit' value='1' id='eliminarP' name='e' class='btnIE'>Eliminar</button>";
+                }else{
+                    echo "<button type='submit' value='2' id='eliminarP' name='e' class='btnIE'>Restaurar</button>";
+                }
+           echo "</div>";
+        
+       
         echo "<div class='portfolio'>";
         foreach($queryH as $row){
             echo"<div class='headA'>";  

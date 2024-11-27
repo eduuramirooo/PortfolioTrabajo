@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2024 a las 13:09:53
+-- Tiempo de generación: 21-11-2024 a las 19:31:27
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,10 +43,7 @@ CREATE TABLE `head` (
 --
 
 INSERT INTO `head` (`id`, `id_usuario`, `id_portfolio`, `name`, `apellido`, `apellido2`, `anio`, `img`) VALUES
-(1, 1, 1, 'Eduuu  ', 'El duro    ', 'Maximiliano    ', '1111', './img/subidas/1-1.jpg'),
-(2, 1, 2, 'Eduuuuuuu    ', '123    ', '1    ', '1111', './img/subidas/1-2.jpg'),
-(3, 4, 3, 'Sandris ', 'Warra ', 'Del Sur ', '1994', './img/subidas/4-3.jpg'),
-(4, 4, 4, 'adadaa', 'adad', 'adadad', '1111', './img/subidas/4-4.jpg');
+(1, 1, 1, 'Eduardo', 'Ramiro', '1', '1111', './img/subidas/upload1-1.jpg');
 
 -- --------------------------------------------------------
 
@@ -69,10 +66,7 @@ CREATE TABLE `linea_experiencia` (
 --
 
 INSERT INTO `linea_experiencia` (`id`, `id_portfolio`, `company`, `position`, `fechaE`, `fechaS`, `experience`) VALUES
-(1, 1, 'Casa Okupa   ', 'Cortador de Coca   ', '2024-11-26', '2024-11-28', 'Muy buena   '),
-(2, 2, '   Duro ', '    ', '1970-01-01', '1970-01-01', '    '),
-(3, 3, ' Club de Striptease', ' Warra', '1970-01-01', '1970-01-01', ' Chupando vergas a viejos'),
-(4, 4, '', '', '1970-01-01', '1970-01-01', '');
+(1, 1, 'Fumador', '1', '2024-11-22', '2024-11-23', 'Fumo');
 
 -- --------------------------------------------------------
 
@@ -82,19 +76,15 @@ INSERT INTO `linea_experiencia` (`id`, `id_portfolio`, `company`, `position`, `f
 
 CREATE TABLE `port` (
   `id` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT 1
+  `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `port`
 --
 
-INSERT INTO `port` (`id`, `id_usuario`, `activo`) VALUES
-(1, 1, 0),
-(2, 1, 0),
-(3, 4, 1),
-(4, 4, 1);
+INSERT INTO `port` (`id`, `id_usuario`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -116,10 +106,7 @@ CREATE TABLE `social` (
 --
 
 INSERT INTO `social` (`id`, `twitter`, `github`, `email`, `tel`, `id_portfolio`) VALUES
-(1, '   ', 'a  ', '111@gmail.com   ', '   ', 1),
-(2, 'luisitoleal  ', 'eduuramiroo    ', '111@gmail.com    ', '    1', 2),
-(3, 'ansufatidico ', 'eduuramirooo ', '111@gmail.com ', '66666666 ', 3),
-(4, 'a', 'aa', '111@gmail.com', '', 4);
+(1, 'luisitoleal', 'luisleal', 'eduardoramirozabaleta@gmail.com', '654618294', 1);
 
 -- --------------------------------------------------------
 
@@ -140,8 +127,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `nombre`, `username`, `password`) VALUES
 (1, 'Edu', 'eduu', '$2y$10$VLg4PqJhvLS5k6Xjw7Xe6eSnTonMhR9uzhMx.dKh/NkVskTJ0/NUe'),
-(2, 'Alex', 'ales', '$2y$10$oBTwC3/xuYjoedu1KO473OzLRv4P7Aki5MzytE3gN97lDvuzK9FWW'),
-(4, 'Zorra', 'zorramistica', '$2y$10$trHS7uv0SV41de5gw9S.G.UTKRtCVMkzT7PWoMz3wH6ZzZCDHG9na');
+(2, 'Alex', 'ales', '$2y$10$oBTwC3/xuYjoedu1KO473OzLRv4P7Aki5MzytE3gN97lDvuzK9FWW');
 
 --
 -- Índices para tablas volcadas
@@ -185,31 +171,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `head`
 --
 ALTER TABLE `head`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `linea_experiencia`
 --
 ALTER TABLE `linea_experiencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `port`
 --
 ALTER TABLE `port`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `social`
 --
 ALTER TABLE `social`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
