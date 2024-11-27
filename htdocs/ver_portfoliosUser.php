@@ -1,20 +1,54 @@
 
 <?php
-    echo "<script> document.addEventListener(\"DOMContentLoaded\",()=>{
-        const portfolio = document.querySelectorAll(\".portfolioPreview\");
-        for(let i=0; i<portfolio.length; i++){
-                setTimeout(()=>{
-                portfolio[i].classList.add('visible');
-            },100);
-            }
-          
-         });
+   echo "<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const portfolio = document.querySelectorAll('.portfolioPreview');
+        for (let i = 0; i < portfolio.length; i++) {
+            cargarAtributos(portfolio[i], i * 200); // Cada iteración tiene un retraso adicional
+        }
+    });
+    
+    function cargarAtributos(atributo, tiempo) {
+        setTimeout(() => {
+            atributo.classList.add('visible');
+        }, tiempo);
+    } 
+    
+    function cambiarTitulo(nuevoTitulo) {
+        const tituloElemento = document.getElementById('titulo'); // Cambiar el nombre de la variable
+        console.log(tituloElemento);    
+        if (tituloElemento) { // Verificar si el elemento existe
+            tituloElemento.innerHTML = nuevoTitulo;
+        }
+    }
     </script>";
     include_once ("conectar.php");
     $conectar = new Conectar("localhost", "root", "", "portfolio");
     $id= $_SESSION['id'];
-    $query = $conectar->recibir_datos("SELECT * FROM port WHERE id_usuario = $id");
-    echo "<h1 id='titulo'>Portfolios</h1>"; 
+    $papelera = $_SESSION['papelera'] ?? null;
+    echo "<h1 id='titulo'>Portfolios </h1>"; 
+    echo "<a href='index.php?corr=3' class='btnIE'>Papelera de reciclaje</a>";
+    if($papelera==1){
+        $query = $conectar->recibir_datos("SELECT * FROM port WHERE id_usuario = $id and activo = 0");
+        echo "<script>const titulo=document.getElementById('titulo')
+         titulo.innerHTML='Papelera de reciclaje'
+         const portfolios=document.querySelector('.portfolios')
+         </script>";
+    }else if($papelera==0){
+        $query = $conectar->recibir_datos("SELECT * FROM port WHERE id_usuario = $id and activo = 1");
+        if(!$query){
+            echo "<script>const titulo=document.getElementById('titulo')
+            titulo.innerHTML='No tienes portfolios activos' 
+            const portfolios=document.querySelector('.portfolios')
+            portfolios.style.display='flex'    
+            </script>";
+            include_once("form.php");
+        }
+    }
+     else if($papelera==null){
+ 
+     }
+
     if($query){
         echo "<div class='portfolios'>";
         foreach($query as $row){
@@ -32,12 +66,6 @@
            }
         }
         echo "</div>";
-    }else{
-        echo "<script>const titulo=document.getElementById('titulo')
-        titulo.innerHTML='No tienes portfolios'
-        const portfolios=document.querySelector('.portfolios')
-        portfolios.style.display='flex'    
-        </script>";
-        include_once("home.php");
     }
+
 ?>

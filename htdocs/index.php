@@ -63,14 +63,18 @@
                     if($corr==2){
                         include_once("form.php");
                         exit;
+                    }else if($corr==3){
+                        $_SESSION['papelera'] = 1;
+                        include_once("ver_portfoliosUser.php");                      
+                    }else{
+                        $_SESSION['papelera'] = 0;
+                        $_SESSION['idPortfolio'] = $idPortfolio[0]['id'];
+                        header("Location: index.php?corr=1");
+                        include("home.php");
                     }
-                $_SESSION['idPortfolio'] = $idPortfolio[0]['id'];
-                header("Location: index.php?corr=1");
             }
-             include_once("home.php");
-
         }else{
-            
+            $_SESSION['papelera'] = 0;
             echo $portfolio ;
             include_once("ver_portfoliosUser.php");
         }
@@ -89,6 +93,6 @@
     }
 
 ?>
-    
+    <script src="./js/funciones.js" defer ></script>
 </body>
 </html>

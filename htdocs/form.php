@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id= $_SESSION['id'];
     $imagen = $_FILES['image']['name'];
     // Ahora voy a cambiar el nombre a la imagen
-    $imagen="upload".$id."-".$idPortfolio.".jpg";
+    $imagen=$id."-".$idPortfolio.".jpg";
     if (isset($imagen) && $imagen != "") {
         $tipo = $_FILES['image']['type'];
         $tamanio = $_FILES['image']['size'];
@@ -79,12 +79,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $github = $_POST['github'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-
     $querySocial = $conectar->hacer_consulta("INSERT INTO social (twitter, github, email, tel, id_portfolio) VALUES (?,?,?,?,?)", "ssssi", [$twitter, $github, $email, $phone, $idPortfolio]);
 
 }
 ?>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function () {

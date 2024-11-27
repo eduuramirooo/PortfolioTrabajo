@@ -291,7 +291,7 @@ input:focus::placeholder {
   grid-template-columns: 40% 60% ;
 }
 .portfolio .headA img{
-  width: 150px;
+  width: 300px;
 
   border-radius: 5px;
   margin :10px;
@@ -362,15 +362,21 @@ header .grid3 a{
 }
 .portfolioE input[type="file"]{
   opacity: 0;
-  height: 300px;
+  height: 200px;
   width: 300PX;
   display: flex;
   position: absolute;
-  left: 15%;
+  left: 40%;
   top:0;
   transform: opacity 0.5s ease;
   color: transparent;
   background-color: transparent;
+}
+.portfolioE img{
+  width: 300px;
+  border-radius: 5px;
+  margin: 10px;
+  margin-left: 40%;
 }
 .portfolioE input[type="file"]::file-selector-button{
   background-color:transparent;
@@ -378,8 +384,7 @@ header .grid3 a{
   border:none;
   }
 .portfolioE input[type="file"]:hover{
-  border:none;
-  opacity: 0.5;
+  background-color: transparent;
 }
 .formIE{
   margin: 0% auto 2%;
@@ -388,12 +393,25 @@ header .grid3 a{
   text-align: left;
 }
 .formIE input[type='submit']{
-  width: 90%;
+  margin: 10%;
+  width: 80%;
 }
 .infoE{
   display: grid;
   grid-template-columns: 50% 50%;
 }
+.portfolioE p{
+  text-align: center;
+  margin: 10px;
+}
+#ignorar form{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: 10px auto;
+  border: none;
+  box-shadow: none;
+}
+
 .visible{
   opacity: 1;
   transform: translateY(0);
