@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2024 a las 19:31:27
+-- Tiempo de generación: 28-11-2024 a las 13:59:24
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -76,15 +76,16 @@ INSERT INTO `linea_experiencia` (`id`, `id_portfolio`, `company`, `position`, `f
 
 CREATE TABLE `port` (
   `id` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL
+  `id_usuario` int(11) NOT NULL,
+  `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `port`
 --
 
-INSERT INTO `port` (`id`, `id_usuario`) VALUES
-(1, 1);
+INSERT INTO `port` (`id`, `id_usuario`, `activo`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 

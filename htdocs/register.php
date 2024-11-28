@@ -20,7 +20,7 @@
                 }
         }}
     ?>
-    <form id="registerForm" action="register.php" method="POST">
+    <form id="registerForm" action="register.php" method="POST" style="margin-top: 20px;">
         <h3>Please register</h3>
         <label for="name">Name</label>
         <input type="text" name="name" id="name" required maxlength="20">
@@ -30,5 +30,5 @@
         <input type="password" name="password" required>
         <p id="errorLog"></p>
         <button type="submit">Enviar</button>
-        <a href="index.php?id=2">Login</a>
+        <a href="index.php?id=2">Salir</a>
     </form>

@@ -6,7 +6,7 @@
            portfolio.classList.add('visible');
         },200); });
     </script>";
-$id= $_SESSION['id'];
+$id= $_SESSION['id']?? null;
     include_once ("conectar.php");
     $conectar = new Conectar("localhost", "root", "", "portfolio");
     $portfolio= $_SESSION['idPortfolio'] ;
@@ -19,20 +19,23 @@ $id= $_SESSION['id'];
         $queryPortfolio = $conectar->recibir_datos("SELECT * FROM port WHERE id = $portfolio");
         $estado = $queryPortfolio[0]['activo'];
         $querySocial = $conectar->recibir_datos("SELECT * FROM social WHERE id_portfolio = $portfolio");
-        echo "<h1>Portfolio/CV</h1>";
+        echo "<div class='portfolioA'><h1>Portfolio/CV</h1>";
 
+        echo "<div id='ignorar'>";
+        if(isset($id)){
+                echo "<form action='logica.php' method='get' >";
+                   echo" <a href='index.php?portfolio=".$portfolio."&editar=true'>Editar</a>";
 
-        echo "<div id='ignorar'>
-
-            <form action='logica.php' method='get' >
-                <a href='index.php?portfolio=".$portfolio."&editar=true'>Editar</a>";
-                if($estado == 1){
-                    echo "<button type='submit' value='1' id='eliminarP' name='e' class='btnIE'>Eliminar</button>";
-                }else{
-                    echo "<button type='submit' value='2' id='eliminarP' name='e' class='btnIE'>Restaurar</button>";
+                    if($estado == 1){
+                        echo "<button type='submit' value='1' id='eliminarP' name='e' class='btnIE'>Eliminar</button>";
+                    }else{
+                        echo "<button type='submit' value='2' id='eliminarP' name='e' class='btnIE'>Restaurar</button>";
+                    }
+                echo "</form></div>";
                 }
-           echo "</div>";
-        
+                    echo "<button id='añadirP' class='btnIE'>Añadir a favoritos</button>";
+                
+        echo "</div>";
        
         echo "<div class='portfolio'>";
         foreach($queryH as $row){
@@ -66,7 +69,7 @@ $id= $_SESSION['id'];
             echo"</div>";
             
         }
-        echo "</div>";
+        echo "</div></div></div>";
     
   
 ?>

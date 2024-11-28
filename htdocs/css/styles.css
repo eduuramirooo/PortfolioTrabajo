@@ -411,7 +411,69 @@ header .grid3 a{
   border: none;
   box-shadow: none;
 }
+#iniciarSesionButton{
+  display: flex;
+  position: relative;
+  padding: 10px;
 
+  right: 10px;
+}
+.loginForm{
+  position: absolute;
+  right: 100%;
+  /* volver a estado normal 22% */
+  margin-top: 20px;
+  transition: right 0.5s ease;
+}
+.container-fav{
+  width: 40%;
+  margin-left: 30%;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.container-fav form{
+margin-top: 15px;
+border: none;
+box-shadow: none;
+margin-bottom: 15px;
+}
+.container-fav form button{
+  margin: 10px;
+  width: 60%;
+  margin-left: 22%;
+  border-radius: 100000px;
+  margin-top: 5px;
+}
+.container-fav form input{
+  width: 60%;
+  margin-left: 22%;
+  border-radius: 100000px;
+}
+.container-fav .portfolios{
+  width: 100%;
+  margin-left: 0%;
+}
+.container-fav .portfolioPreview{
+  width: 100%;
+  margin-left: 0%;
+}
+.portfolioA{
+  margin-bottom: 20px;
+}
+#añadirP{
+  margin: 10px;
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: var(--red-brown);
+    color: white;
+    font-size: large;
+    border-radius: 7px;
+}
 .visible{
   opacity: 1;
   transform: translateY(0);

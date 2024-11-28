@@ -30,8 +30,7 @@
         }
     }
 ?>
-
-<form action="login.php" method="post" id="loginForm">
+<form action="login.php" method="post" id="loginForm" class="loginForm">
     <h3>Please log-in</h3>
     <label for="username">User</label>
     <input type="text" name="username" id="username" required>

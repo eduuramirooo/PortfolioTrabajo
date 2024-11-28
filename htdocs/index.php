@@ -39,7 +39,8 @@
                     echo "<a href='index.php?corr=2'>Agregar Porfolio</a>";
                     echo "<a href='logout.php'>Log-Out</a></div>";
                 }else{
-                   echo" <img src='./img/logo.png' alt='logo'>";    
+                   echo"<a href='index.php'> <img src='./img/logo.png' alt='logo'></a>"; 
+                   echo"<button id='iniciarSesionButton'>Log-IN</button>";
                 }
             ?>
     
@@ -51,7 +52,6 @@
             if($editar){
                 include_once("editarP.php");
             }else{
-
                 $_SESSION['idPortfolio']=$portfolio;
                 include_once("portfolio.php");
             }
@@ -82,6 +82,11 @@
 
     }
     else{
+        include_once("mainSinIniciar.php");
+        if(isset($portfolio)){
+            $_SESSION['idPortfolio']=$portfolio;
+            include_once("portfolio.php");
+        }
         // Si no está registrado vemos si quiere iniciar sesion o registrarse
         if($idW == 1){
             include_once("register.php");
