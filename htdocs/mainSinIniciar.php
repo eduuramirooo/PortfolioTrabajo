@@ -1,8 +1,5 @@
 
 
-
-
-
 <?php
         include_once("conectar.php");
         $conectar = new Conectar("localhost", "root", "", "portfolio");
@@ -24,6 +21,7 @@
     <button type="submit">Ver Portfolios</button>
 </form>
 <?php
+include_once("fav.php");
     $query = $conectar->recibir_datos("SELECT * FROM port WHERE activo = 1");
 if($query){
     echo"<h1>Portfolios</h1>";

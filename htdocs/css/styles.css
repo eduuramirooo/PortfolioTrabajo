@@ -4,7 +4,7 @@
     --red-brown: #A85A59;
     --light-blue: #7A98BF;
     --dark-blue: #3C73A8;
-    --soft-lilac: #C986D2;
+    --soft-lilac: #ffffff;
     --black: #000000;
     --gray: #8C8C8C;
 }
@@ -280,7 +280,7 @@ input:focus::placeholder {
   opacity: 0;
   background-color: var(--sand-light);
   transform: translateY(50px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 
@@ -426,8 +426,8 @@ header .grid3 a{
   transition: right 0.5s ease;
 }
 .container-fav{
-  width: 40%;
-  margin-left: 30%;
+  width: 60%;
+  margin-left: 20%;
   text-align: center;
   margin-top: 20px;
   border-radius: 5px;
@@ -456,7 +456,7 @@ margin-bottom: 15px;
   margin-left: 0%;
 }
 .container-fav .portfolioPreview{
-  width: 100%;
+  width: 80%;
   margin-left: 0%;
 }
 .portfolioA{

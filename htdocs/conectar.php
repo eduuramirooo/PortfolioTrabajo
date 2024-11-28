@@ -5,8 +5,6 @@ class Conectar{
     {
         $this->conexion = new mysqli($servidor, $usuario, $contrasena, $bbdd);
     }
-
-   
     function hacer_consulta($consulta, $tipos, $variables){
         $sentencia = $this->conexion->prepare($consulta);
         if ($sentencia === false) {
@@ -22,7 +20,6 @@ class Conectar{
             throw new Exception("Error in execute: " . $sentencia->error);
         }
     }
-
     function recibir_datos($consulta){
         $sentencia = $this->conexion->query($consulta);
         if ($sentencia === false) {

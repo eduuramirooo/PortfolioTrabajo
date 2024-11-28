@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($query) {
                     echo "Imagen subida y guardada correctamente";
                 } else {
-                  $queryPortfolio = $conectar->hacer_consulta("INSERT INTO port (id_usuario) VALUES (?)", "i", [$id]);
+                  $queryPortfolio = $conectar->hacer_consulta("INSERT INTO port (id_usuario, activo) VALUES (??)", "ii", [$id, 1]);
                   header("Location: index.php?corr=1");
 
                 }

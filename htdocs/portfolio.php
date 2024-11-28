@@ -22,7 +22,7 @@ $id= $_SESSION['id']?? null;
         echo "<div class='portfolioA'><h1>Portfolio/CV</h1>";
 
         echo "<div id='ignorar'>";
-        if(isset($id)){
+        if(isset($id)&&$id==$queryPortfolio[0]['id_usuario']){
                 echo "<form action='logica.php' method='get' >";
                    echo" <a href='index.php?portfolio=".$portfolio."&editar=true'>Editar</a>";
 
