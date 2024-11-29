@@ -40,19 +40,19 @@ $id= $_SESSION['id']?? null;
         echo "<div class='portfolio'>";
         foreach($queryH as $row){
             echo"<div class='headA'>";  
-            echo "<img src='".$row['img']."' alt='".$row['name']."'  >";
-            echo "<div class='social'>
-            <p>Redes Sociales</p>";
+            echo "<img src='".$row['img']."' alt='".$row['name']."'  width=300px; height=300px;>";
+            echo "<div class='social'>";
+            echo "<p>Redes Sociales</p><div class='grid-3'>";
             foreach($querySocial as $rowS){
-                    echo "<a href='https://github.com/".$rowS['github']."'><img src='./img/github-svgrepo-com.svg' alt='GitHub' id='github'></a>";
-                    echo "<a href='https://twitter.com/".$rowS['twitter']."'><img src='./img/x-social-media-round-icon.svg' id='twitter'><a>";
-                    echo "<a href ='mailto:".$rowS['email']."'><img src='./img/mail-forward.svg' id='email'></a>";
-                    echo $rowS['tel'];
-            }    }
+                echo "<a href='https://github.com/".$rowS['github']."'><img src='./img/github-svgrepo-com.svg' alt='GitHub' id='github'></a>";
+                echo "<a href='https://twitter.com/".$rowS['twitter']."'><img src='./img/x-social-media-round-icon.svg' id='twitter'><a>";
+                echo "<a href ='mailto:".$rowS['email']."'><img src='./img/mail-forward.svg' id='email'></a></div>";
+                echo "<p>📲".$rowS['tel']."</p>";
+            }}
 
             
             echo"</div></div><hr>";
-            echo "<div class='infoHead'>";
+            echo "<div class='infoHead'><p>Información Personal</p>";
             echo "<h2>".$row['name']."</h2>";
             echo "<h2>".$row['apellido']."</h2>";
             echo "<h2>".$row['apellido2']."</h2>";

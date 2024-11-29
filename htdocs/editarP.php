@@ -3,7 +3,13 @@
         const portfolio = document.querySelector(\".portfolioE\");
         setTimeout(()=>{
            portfolio.classList.add('visible');
-        },300); });
+        },300);
+        const inputColor = document.querySelector(\"#ColorF\");
+        const portfolioForm = document.querySelector(\".formIE\");
+        inputColor.addEventListener(\"change\",()=>{
+            portfolioForm.style.backgroundColor = inputColor.value;
+        });
+    });
     </script>";
 
     $id=$_SESSION['id'];
@@ -17,7 +23,7 @@
          }
          $queryE = $conectar->recibir_datos("SELECT * FROM linea_experiencia WHERE id_portfolio = $portfolio");
          $querySocial = $conectar->recibir_datos("SELECT * FROM social WHERE id_portfolio = $portfolio");
-         echo "<h1>Portfolio/CV edit</h1>";
+         echo "<h1>Vista previa</h1>";
          // echo "<a href='index.php?portfolio=".$portfolio."&editar=true'>Editar</a>";
          echo "<div class='portfolioE'>";
          echo "<form action='logica.php' method='POST' class='formIE'>";
@@ -70,5 +76,11 @@
            
             echo "</div></form>";
          }
+      echo"<form action='logica.php' method='POST' class='formColores'>";
+         echo "<div class='colores'>";
+            echo "<p>Colores</p>";
+            echo "<label for='colorF'>Color Fondo</label>";
+            echo "<input type='color' name='colorF' value='#000000' class='inputIE' id='ColorF'>";
+      echo "</form>";
       
     ?>

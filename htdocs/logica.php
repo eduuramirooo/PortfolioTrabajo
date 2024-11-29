@@ -3,6 +3,7 @@
             session_start();
             include_once ("conectar.php");
             $conectar = new Conectar("localhost", "root", "", "portfolio");
+            
             $portfolio= $_SESSION['idPortfolio'] ;
             $name = $_POST['name'];
             $apellido = $_POST['apellido'];
@@ -13,14 +14,22 @@
             $fechaE = $_POST['fechaE'];
             $fechaS = $_POST['fechaS'];
             $experience = $_POST['experience'];
-            $github = $_POST['github'];
-            $twitter = $_POST['twitter'];
+            $github = trim($_POST['github']);
+            $twitter = trim($_POST['twitter']);
             $email = $_POST['email'];
             $tel = $_POST['tel'];
+            
             $queryH = $conectar->hacer_consulta("UPDATE head SET name = ?, apellido = ?, apellido2 = ?, anio = ? WHERE id_portfolio = ?",  "ssssi", [$name, $apellido, $apellido2, $anio, $portfolio]);
             $queryE = $conectar->hacer_consulta("UPDATE linea_experiencia SET company = ?, position = ?, fechaE = ?, fechaS = ?, experience = ? WHERE id_portfolio = ?", "sssssi", [$company, $position, $fechaE, $fechaS, $experience, $portfolio]);
             $querySocial = $conectar->hacer_consulta("UPDATE social SET github = ?, twitter = ?, email = ?, tel = ? WHERE id_portfolio = ?", "ssssi", [$github, $twitter, $email, $tel, $portfolio]);
-            if($queryH && $queryE && $querySocial){
+            $conn = new mysqli("localhost", "root", "", "portfolio"); 
+            $colorF = $conn->real_escape_string($_POST['colorF']);
+
+            // Validar que sea un código de color hexadecimal
+            if(preg_match('/^#[a-f0-9]{6}$/i', $colorF)){
+                $queryEstilo = $conectar->hacer_consulta("UPDATE estilo SET colorFondo = ? WHERE id_portfolio = ?", "si", [$colorF, $portfolio]);
+            }
+            if($queryH && $queryE && $querySocial && $queryEstilo){
                 header("Location: index.php?portfolio=".$portfolio."&editar=true");
             }else{
                 header("Location: index.php?portfolio=".$portfolio."");
@@ -71,28 +80,7 @@
                     }
                 }}
             }
-            ///valorar el e para cambiar tanto el a como la funcion del sql
-            // if($_GET['e'] == 1){
-            //     $queryH=$conectar -> hacer_consulta("UPDATE port SET activo = 1 WHERE id = ?", "i", [$portfolio]);
-            //     echo "<script>document.addEventListener('DOMContentLoaded',()=>{
-            //         const eliminarP = document.getElementById('eliminarP');
-            //         eliminarP.innerHTML='Restaurar';
-            //         eliminarP.href='logica.php?e=0';
-            //     });</script>";
-            //     if(!$queryH){
-            //         header("Location: index.php");
-            //     }
-            // }else{
-            //     $queryH=$conectar -> hacer_consulta("UPDATE port SET activo = 0 WHERE id = ?", "i", [$portfolio]);
-            //     echo "<script>document.addEventListener('DOMContentLoaded',()=>{
-            //         const eliminarP = document.getElementById('eliminarP');
-            //         eliminarP.innerHTML='Eliminar';
-            //         eliminarP.href='logica.php?e=1';
-            //     });</script>";
-            //     if(!$queryH){
-            //         header("Location: index.php");
-            //     }
-            // }
+            
            }
-
+        
 ?>

@@ -27,7 +27,7 @@
     $id= $_SESSION['id'];
     $papelera = $_SESSION['papelera'] ?? null;
     echo "<h1 id='titulo'>Portfolios </h1>"; 
-    echo "<a href='index.php?corr=3' class='btnIE'>Papelera de reciclaje</a>";
+    echo "<a href='index.php?corr=3' class='btnIE' id='PR'>Papelera de reciclaje🗑️</a>";
     if($papelera==1){
         $query = $conectar->recibir_datos("SELECT * FROM port WHERE id_usuario = $id and activo = 0");
         echo "<script>const titulo=document.getElementById('titulo')

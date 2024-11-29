@@ -5,77 +5,72 @@ window.onload = () => {
     const container = document.querySelector(".container-fav");
     const portfolioA = document.querySelector(".portfolioA");
     const botonFav = document.querySelector("#añadirP");
+    const favoritoDiv = document.querySelector(".fav");
     let urlParams = new URLSearchParams(window.location.search);
     let id = urlParams.get('portfolio');
+    const gotoP= document.querySelector("#gotoP");
+    const gotoPS= document.querySelector("#gotoPS");
+    gotoPS.addEventListener("change", () => {
+        gotoP.href = "http://localhost/index.php?portfolio="+gotoPS.value+"&&ocultar=1";
+    });
+    gotoP.addEventListener("click", () => {
+        if(gotoPS.value!=0){
 
-// Check si hay algun registro en el localstorage
-if (localStorage.getItem("fav") === null) {
-    const favoritoDiv= document.querySelector(".fav")
-    favoritoDiv.style.display = "none";
-}
+            container.style.display = "none";
+        }
+    });
 
-
+    // Check si hay algún registro en el localStorage
+    if (!localStorage.getItem("fav")) {
+        if (favoritoDiv) favoritoDiv.style.display = "none";localStorage.clear();
+        
+    }
     // Check if the current page includes "portfolio"
-    if (paginaActual.includes("portfolio")) {
+    if (paginaActual.includes("portfolio") && id) {
         let carrito = JSON.parse(localStorage.getItem("fav")) || [];
-
         if (carrito.includes(id)) {
             botonFav.innerHTML = "Eliminar de favoritos";
         }
-
+if (paginaActual.includes("ocultar")) {
+        container.style.display = "none";
+}
         botonFav.addEventListener("click", () => {
             if (carrito.includes(id)) {
                 // Remove from favorites
-                let index = carrito.indexOf(id);
-                if (index !== -1) {
-                    carrito.splice(index, 1);
-                    localStorage.setItem("fav", JSON.stringify(carrito));
-                    botonFav.innerHTML = "Añadir a favoritos";
-                    botonFav.disabled = false;
-                }
+                carrito = carrito.filter(item => item !== id);
+                botonFav.innerHTML = "Añadir a favoritos";
             } else {
                 // Add to favorites
                 carrito.push(id);
-                localStorage.setItem("fav", JSON.stringify(carrito));
                 botonFav.innerHTML = "Eliminar de favoritos";
-                botonFav.disabled = true;
             }
+
+            localStorage.setItem("fav", JSON.stringify(carrito));
+            botonFav.disabled = false; // Asegura que no se deshabilite permanentemente.
         });
     }
 
-    // Add to favorites function
-    const añadirFav = (id) => {
-        let carrito = JSON.parse(localStorage.getItem("fav")) || [];
-
-        if (!carrito.includes(id)) {
-            carrito.push(id);
-            localStorage.setItem("fav", JSON.stringify(carrito));
-        }
-    };
-
-    // Hide elements on specific page
+    // Ocultar elementos en una página específica
     if (paginaActual === "http://localhost/index.php?id=1") {
-        container.style.display = "none";
-        boton.style.display = "none";
+        if (container) container.style.display = "none";
+        if (boton) boton.style.display = "none";
     }
 
-    // Handle button click for login form
-    boton.addEventListener("click", () => {
-        form.style.right = "22%";
-        boton.style.display = "none";
-        container.style.display = "none";
-        portfolioA.style.display = "none";
+    // Manejar animación de las vistas previas de portfolio
+    const portfolio = document.querySelectorAll('.portfolioPreview');
+    portfolio.forEach((item, i) => {
+        setTimeout(() => {
+            item.classList.add('visible');
+        }, i * 200);
     });
 
-    // Animate portfolio previews
-    const portfolio = document.querySelectorAll('.portfolioPreview');
-    for (let i = 0; i < portfolio.length; i++) {
-        cargarAtributos(portfolio[i], i * 200); // Add incremental delay for each iteration
-    }
-
-    function cargarAtributos(atributo, tiempo) {
-        setTimeout(() => {
-            atributo.classList.add('visible');
-        }, tiempo);
+    // Evento de inicio de sesión
+    if (boton) {
+        boton.addEventListener("click", () => {
+            if (form) form.style.right = "22%";
+            boton.style.display = "none";
+            if (container) container.style.display = "none";
+            if (portfolioA) portfolioA.style.display = "none";
+        });
     }
 };

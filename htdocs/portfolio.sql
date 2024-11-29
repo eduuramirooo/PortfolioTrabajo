@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2024 a las 13:59:24
+-- Tiempo de generación: 29-11-2024 a las 11:49:43
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,7 +43,13 @@ CREATE TABLE `head` (
 --
 
 INSERT INTO `head` (`id`, `id_usuario`, `id_portfolio`, `name`, `apellido`, `apellido2`, `anio`, `img`) VALUES
-(1, 1, 1, 'Eduardo', 'Ramiro', '1', '1111', './img/subidas/upload1-1.jpg');
+(1, 1, 1, 'Eduardo    ', 'Ramiro    ', '1    ', '1111', './img/subidas/upload1-1.jpg'),
+(2, 1, 2, 'Paco', 'Gonzalez', 'Del Sur', '1970', './img/subidas/1-2.jpg'),
+(3, 1, 3, 'Campi', 'David', 'Trenado', '2004', './img/subidas/1-3.jpg'),
+(4, 1, 4, 'Guts', 'El duro', 'Sanchez', '1999', './img/subidas/1-4.jpg'),
+(5, 1, 5, 'Falo', 'San', 'Roque', '500', './img/subidas/1-5.jpg'),
+(6, 1, 6, 'Jalan', 'Man', ' City', '1111', './img/subidas/1-6.jpg'),
+(7, 1, 7, 'Campi ', 'a1 ', '1 ', '1 ', './img/subidas/1-7.jpg');
 
 -- --------------------------------------------------------
 
@@ -66,7 +72,13 @@ CREATE TABLE `linea_experiencia` (
 --
 
 INSERT INTO `linea_experiencia` (`id`, `id_portfolio`, `company`, `position`, `fechaE`, `fechaS`, `experience`) VALUES
-(1, 1, 'Fumador', '1', '2024-11-22', '2024-11-23', 'Fumo');
+(1, 1, 'Coessegur    ', 'IT ', '2024-11-22', '2024-11-23', 'Oficina'),
+(2, 2, 'Obra', 'Obrero', '2013-01-29', '2024-11-29', 'No trabajéis en la obra'),
+(3, 3, 'Cobs And Tops', 'Tartero', '2018-01-29', '2024-11-29', 'Muy buena'),
+(4, 4, 'Señor Sombrio', 'Ladrón', '2014-05-29', '2024-11-29', 'Ibai a sueldo del PSOE'),
+(5, 5, 'Camello', 'Porrero', '1912-01-29', '2024-11-29', '2 detenciones'),
+(6, 6, 'Man City', 'Delantero', '2009-01-29', '2024-11-29', 'No ganó el BDO'),
+(7, 7, ' Swag', ' Albañil', '1970-01-01', '2023-05-01', ' Vende Tussi');
 
 -- --------------------------------------------------------
 
@@ -85,7 +97,13 @@ CREATE TABLE `port` (
 --
 
 INSERT INTO `port` (`id`, `id_usuario`, `activo`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(2, 1, 1),
+(3, 1, 1),
+(4, 1, 1),
+(5, 1, 1),
+(6, 1, 1),
+(7, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +125,13 @@ CREATE TABLE `social` (
 --
 
 INSERT INTO `social` (`id`, `twitter`, `github`, `email`, `tel`, `id_portfolio`) VALUES
-(1, 'luisitoleal', 'luisleal', 'eduardoramirozabaleta@gmail.com', '654618294', 1);
+(1, 'luisitoleal', 'as', 'eduardoramirozabaleta@gmail.com    ', '654618294    ', 1),
+(2, 'a', 'a', 'josemacho@gmail.com ', '111111111 ', 7),
+(3, 'a', 'a', 'adadad@gmail.com', '113133133', 3),
+(4, 'a', 'a', 'adadad@gmail.com', '1113133', 2),
+(5, 'ansufatidico', 'eduuramirooo', 'adadad@gmail.com', '6666666', 4),
+(6, 'faliyo', 'faliyo', 'adadad@gmail.com', '1131313', 5),
+(7, 'a', 'a', 'adadad@gmail.com', '131313', 6);
 
 -- --------------------------------------------------------
 
@@ -172,25 +196,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `head`
 --
 ALTER TABLE `head`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `linea_experiencia`
 --
 ALTER TABLE `linea_experiencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `port`
 --
 ALTER TABLE `port`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `social`
 --
 ALTER TABLE `social`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

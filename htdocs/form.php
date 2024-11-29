@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($query) {
                     echo "Imagen subida y guardada correctamente";
                 } else {
-                  $queryPortfolio = $conectar->hacer_consulta("INSERT INTO port (id_usuario, activo) VALUES (??)", "ii", [$id, 1]);
+                  $queryPortfolio = $conectar->hacer_consulta("INSERT INTO port (id_usuario, activo) VALUES (?,?)", "ii", [$id, 1]);
                   header("Location: index.php?corr=1");
 
                 }
@@ -72,7 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fechaS = date("Y-m-d", strtotime($_POST["fechaS"]));
     $explained= $_POST["explained"];
     $queryInsert = $conectar->hacer_consulta("INSERT INTO linea_experiencia (company, position, fechaE, fechaS, experience, id_portfolio) VALUES (?,?,?,?,?,?)", "sssssi", [$workstation, $positionC, $fechaE, $fechaS, $explained, $idPortfolio]);
-    
 
     //Social Profiles
     $twitter = $_POST['twitter'];
